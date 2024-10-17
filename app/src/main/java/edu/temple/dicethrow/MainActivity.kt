@@ -13,8 +13,14 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         findViewById<Button>(R.id.rollDiceButton).setOnClickListener {
             // so the findFragmentById returns a Fragment, we need to cast it to DieFragment
-            val fragment = supportFragmentManager.findFragmentById(R.id.dieContainer) as DieFragment
-            fragment.throwDie()
+//            val fragment = supportFragmentManager.findFragmentById(R.id.dieContainer) as DieFragment
+//            fragment.throwDie()
+            if(supportFragmentManager.findFragmentById(R.id.dieContainer) !is DieFragment) {
+      supportFragmentManager.beginTransaction()
+                    .add(R.id.dieContainer, DieFragment.newInstance(20))
+                    .commit()
+            }
+//            if(savedInstanceState == null)
         }
     }
 }

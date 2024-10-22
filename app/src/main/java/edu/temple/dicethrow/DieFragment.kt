@@ -13,7 +13,8 @@ class DieFragment : Fragment() {
 
 
     lateinit var dieTextView: TextView
-
+    private var rollValue = 0
+    private val key = "rollValue"
     var dieSides: Int = 6
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,14 +38,26 @@ class DieFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        throwDie()
-        view.setOnClickListener{
+        savedInstanceState?.run {
+            rollValue = getInt(key)
+        }
+        if(rollValue == 0){
             throwDie()
+        }else{
+            dieTextView.text = rollValue.toString()
         }
     }
 
+    // onsave instance state
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putInt(key, rollValue)
+    }
+
     fun throwDie() {
-        dieTextView.text = (Random.nextInt(dieSides) + 1).toString()
+        val number = (Random.nextInt(dieSides) + 1)
+        rollValue = number
+        dieTextView.text = number.toString()
     }
 
     companion object {

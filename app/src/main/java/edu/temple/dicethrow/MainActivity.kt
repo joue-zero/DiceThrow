@@ -12,13 +12,13 @@ class MainActivity : AppCompatActivity(), ButtonInterface {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
     }
+
     override fun buttonClick(){
         if(supportFragmentManager.findFragmentById(R.id.dieContainer) !is DieFragment) {
             supportFragmentManager.beginTransaction()
                 .add(R.id.dieContainer, DieFragment.newInstance(20))
                 .commit()
-        }
-        else {
+        } else {
             val fragment = supportFragmentManager.findFragmentById(R.id.dieContainer) as DieFragment
             fragment.throwDie()
         }

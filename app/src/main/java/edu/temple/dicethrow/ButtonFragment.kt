@@ -19,6 +19,7 @@ class ButtonFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_button, container, false).apply {
             findViewById<Button>(R.id.button).setOnClickListener { // every fragement can access
                 (activity as ButtonInterface).buttonClick()
+                // the difference between activity and requireActivity is that requireActivity will throw an exception if the activity is null
             }
         }
     }
